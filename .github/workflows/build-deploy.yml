@@ -15,6 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build Docker Images
+      working-directory: docker
       run: |
         export CADDY_USER1_HASH_PASSWORD=${{ secrets.CADDY_USER1_HASH_PASSWORD }}
         echo "${{ secrets.VPN_SERVER_PRIVATE_KEY }}" > tinc/config/rsa_key.priv
@@ -39,6 +40,7 @@ jobs:
         key: ${{ secrets.AZURE_INSTANCE3_PRIVATE_KEY }}
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - name: Run Docker Images
+      working-directory: docker
       run: |
         export CADDY_USER1_HASH_PASSWORD=FOO
         docker compose -H ssh://azureuser@stevenzps2.duckdns.org up
