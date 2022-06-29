@@ -1,0 +1,44 @@
+services:
+  caddy:
+    build: caddy
+    image: stevenzps2.duckdns.org/caddy:latest
+    restart: unless-stopped
+    environment:
+      - USER1_HASH_PASSWORD=${CADDY_USER1_HASH_PASSWORD:?user1 password not defined}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    environment:
+      - TZ=America/Los_Angeles
+      - SUBDOMAINS=stevenzps2
+      - TOKEN=357ab1f0-fcf4-4d3b-b57a-27586bdad722
+      - LOG_FILE=false
+
+  tinc:
+    build: tinc
+    image: stevenzps2.duckdns.org/tinc:latest
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    ports:
+      - "655:655/udp"
+      - "655:655/tcp"
+
+  registry:
+    image: registry:2
+    restart: always
+    ports:
+      - "5000"
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
+

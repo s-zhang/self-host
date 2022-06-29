@@ -1,0 +1,13 @@
+Address = stevenzpshome.duckdns.org
+Port = 3060
+Subnet = 10.20.40.4/32
+-----BEGIN RSA PUBLIC KEY-----
+MIIBCgKCAQEAwi+mbU+SvLRZqKa3GhXp2HQEDqEVhbLHomFRqpYTLUe7COlvjtai
+V1RPAaSy1RuR2SuhcQ/TayHsac60/qV/vAD5+fdu1qhAVh4fPnT54h/XOj3vVBWm
+0T2N+pd6ip2P4/+C5M4gWlDzgbTpxrjrOtxR63NJsSQEfGdy3nI9DENHUITLL/Py
+zcGDZvilV7DruP85kioAFuBbY7QQPx7QBjAvn3p5+s17rS6bflQqQ4xJ01Ly3cs0
+3ApUAsbVgEI3EV0XYr9T28kjqpgvXxNycyPkG/F3A+akqbpHvnc26P6CAw+RxyhD
+GWUVpNExgv0HuTQMpK+qsyqmDGBmbxin4wIDAQAB
+-----END RSA PUBLIC KEY-----
+Ed25519PublicKey = /oCTLGyiw8B/Crglz6mLgqVnvY8Gk7WAXOTG2T7pHNC
+

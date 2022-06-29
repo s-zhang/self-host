@@ -1,0 +1,8 @@
+stevenzps2.duckdns.org {
+  respond /api/hello "Mundoooo!" 200
+  basicauth /* {
+    user1 {$USER1_HASH_PASSWORD}
+  }
+  reverse_proxy registry:5000
+}
+
