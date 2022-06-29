@@ -1,0 +1,45 @@
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: 'prod'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker Images
+      run: |
+        export CADDY_USER1_HASH_PASSWORD=${{ secrets.CADDY_USER1_HASH_PASSWORD }}
+        echo "${{ secrets.VPN_SERVER_PRIVATE_KEY }}" > tinc/config/rsa_key.priv
+        docker compose build
+    - name: Login to Docker Registry
+      run: |
+        docker login --username user1 --password ${{ secrets.DOCKER_REGISTRY_PASSWORD }} stevenzps2.duckdns.org
+    - name: Push Docker Images to Registry
+      run: |
+        docker push stevenzps2.duckdns.org/caddy:latest
+        docker push stevenzps2.duckdns.org/tinc:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'prod'
+    steps:
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.AZURE_INSTANCE3_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+    - name: Run Docker Images
+      run: |
+        export CADDY_USER1_HASH_PASSWORD=FOO
+        docker compose -H ssh://azureuser@stevenzps2.duckdns.org up
+
