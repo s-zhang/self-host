@@ -17,7 +17,6 @@ jobs:
     - name: Build Docker Images
       working-directory: docker
       run: |
-        export CADDY_USER1_HASH_PASSWORD=${{ secrets.CADDY_USER1_HASH_PASSWORD }}
         echo "${{ secrets.VPN_SERVER_PRIVATE_KEY }}" > tinc/config/rsa_key.priv
         docker compose build
     - name: Login to Docker Registry
@@ -43,6 +42,6 @@ jobs:
     - name: Run Docker Images
       working-directory: docker
       run: |
-        export CADDY_USER1_HASH_PASSWORD=FOO
-        docker -H ssh://azureuser@stevenzps2.duckdns.org compose up
+        export CADDY_USER1_HASH_PASSWORD=${{ secrets.CADDY_USER1_HASH_PASSWORD }}
+        docker -H ssh://azureuser@stevenzps2.duckdns.org compose up -d
 
