@@ -17,6 +17,7 @@ jobs:
     - name: Build Docker Images
       working-directory: docker
       run: |
+        export CADDY_USER1_HASH_PASSWORD=FOO
         echo "${{ secrets.VPN_SERVER_PRIVATE_KEY }}" > tinc/config/rsa_key.priv
         docker compose build
     - name: Login to Docker Registry
