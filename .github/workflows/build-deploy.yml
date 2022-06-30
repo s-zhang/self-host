@@ -34,6 +34,7 @@ jobs:
     environment:
       name: 'prod'
     steps:
+    - uses: actions/checkout@v3
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2
       with:
