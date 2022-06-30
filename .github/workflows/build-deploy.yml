@@ -38,7 +38,7 @@ jobs:
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.AZURE_INSTANCE3_PRIVATE_KEY }}
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        known_hosts: ${{ secrets.AZURE_INSTANCE3_KEYSCAN }}
     - name: Run Docker Images
       working-directory: docker
       run: |
