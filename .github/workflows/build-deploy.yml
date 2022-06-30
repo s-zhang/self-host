@@ -44,5 +44,5 @@ jobs:
       working-directory: docker
       run: |
         export CADDY_USER1_HASH_PASSWORD=FOO
-        docker compose -H ssh://azureuser@stevenzps2.duckdns.org up
+        docker -H ssh://azureuser@stevenzps2.duckdns.org compose up
 
