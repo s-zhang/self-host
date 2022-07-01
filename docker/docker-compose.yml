@@ -31,6 +31,12 @@ services:
       - "655:655/udp"
       - "655:655/tcp"
 
+  web:
+    build: ../EasyEaaS
+    image: stevenzps2.duckdns.org/web:latest
+    ports:
+      - "8000"
+
   registry:
     image: registry:2
     restart: always

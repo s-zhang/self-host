@@ -15,11 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Node.js
-      working-directory: EasyEaaS
       uses: actions/setup-node@v3
       with:
         node-version: '16.x'
         cache: 'npm'
+        cache-dependency-path: EasyEaaS/package-lock.json
     - name: npm install, build, and test
       working-directory: EasyEaaS
       run: |
