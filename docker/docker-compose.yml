@@ -32,7 +32,7 @@ services:
       - "655:655/tcp"
 
   web:
-    build: ../EasyEaaS
+    build: easyeaas
     image: stevenzps2.duckdns.org/web:latest
     ports:
       - "8000"
