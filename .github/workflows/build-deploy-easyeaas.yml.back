@@ -1,0 +1,79 @@
+on:
+  push:
+    branches:
+      - "master"
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '12.x'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run test
+        npm run dist
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v3
+      with:
+        name: app
+        path: ./dist
+
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      TARGET_DEPLOY_DIR: ~/deploy/EasyEaaS
+    environment:
+      name: 'Prod'
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: app
+    - name: Stop and Remove Current Version
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: stevenzps.duckdns.org
+        username: szh10000
+        key: ${{ secrets.GCP_INSTANCE1_SSH_KEY }}
+        script: |
+          cd ~/docker
+          docker-compose kill easyeaas
+          rm -rf $TARGET_DEPLOY_DIR/*
+          mkdir $TARGET_DEPLOY_DIR
+    - name: Copy Build Over
+      uses: appleboy/scp-action@v0.1.3
+      with:
+        host: stevenzps.duckdns.org
+        username: szh10000
+        key: ${{ secrets.GCP_INSTANCE1_SSH_KEY }}
+        source: ./*
+        target: ~/deploy/EasyEaaS
+    - name: Start New Version
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: stevenzps.duckdns.org
+        username: szh10000
+        key: ${{ secrets.GCP_INSTANCE1_SSH_KEY }}
+        script: |
+          cd ~/docker
+          docker-compose up easyeaas

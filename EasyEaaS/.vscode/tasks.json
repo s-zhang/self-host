@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "type": "npm",
+      "script": "watch:build",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      "group": "build",
+      "label": "npm: watch:build",
+      "detail": "tsc -p tsconfig.json -w",
+      "isBackground": true
+    }
+  ]
+}
