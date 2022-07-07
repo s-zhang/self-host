@@ -41,11 +41,13 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: web
-        path: docker/web
+        path: docker/web/dist
     - name: Token replace
       uses: cschleiden/replace-tokens@v1
       with:
-        file: '["**/*"]'
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
+        files: '["**/*"]'
       env:
         VPN_SERVER_PRIVATE_KEY: ${{ secrets.VPN_SERVER_PRIVATE_KEY }}
         CADDY_USER1_HASH_PASSWORD: ${{ secrets.CADDY_USER1_HASH_PASSWORD }}

@@ -1,6 +1,6 @@
 FROM node:16
 
-ADD dist/bundle.js /build/bundle.js
+ADD dist /build
 
 ADD config /config
 
