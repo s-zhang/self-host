@@ -14,7 +14,7 @@ services:
     image: lscr.io/linuxserver/duckdns:latest
     environment:
       - TZ=America/Los_Angeles
-      - SUBDOMAINS=stevenzps2
+      - SUBDOMAINS=stevenzps2,stevenzps
       - TOKEN=357ab1f0-fcf4-4d3b-b57a-27586bdad722
       - LOG_FILE=false
 

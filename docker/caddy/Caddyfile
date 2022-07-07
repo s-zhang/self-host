@@ -6,3 +6,10 @@ stevenzps2.duckdns.org {
   reverse_proxy registry:5000
 }
 
+stevenzps.duckdns.org {
+  basicauth /* {
+    user1 #{CADDY_USER1_HASH_PASSWORD}#
+  }
+  reverse_proxy web:8000
+}
+
