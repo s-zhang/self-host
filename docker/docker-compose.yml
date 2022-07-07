@@ -1,8 +1,7 @@
 services:
   caddy:
     build: caddy
-    image: stevenzps2.duckdns.org/caddy:latest1
-    restart: unless-stopped
+    image: stevenzps2.duckdns.org/caddy:${IMAGE_TAG:-latest}
     ports:
       - "80:80"
       - "443:443"
@@ -11,7 +10,7 @@ services:
       - caddy_config:/config
 
   duckdns:
-    image: lscr.io/linuxserver/duckdns:latest1
+    image: lscr.io/linuxserver/duckdns:${IMAGE_TAG:-latest}
     environment:
       - TZ=America/Los_Angeles
       - SUBDOMAINS=stevenzps2,stevenzps
@@ -20,7 +19,7 @@ services:
 
   tinc:
     build: tinc
-    image: stevenzps2.duckdns.org/tinc:latest
+    image: stevenzps2.duckdns.org/tinc:${IMAGE_TAG:-latest}
     cap_add:
       - NET_ADMIN
     devices:
@@ -31,7 +30,7 @@ services:
 
   web:
     build: web
-    image: stevenzps2.duckdns.org/web:latest1
+    image: stevenzps2.duckdns.org/web:${IMAGE_TAG:-latest}
     ports:
       - "8000"
 

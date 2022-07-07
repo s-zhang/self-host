@@ -57,15 +57,17 @@ jobs:
     - name: Build Docker Images
       working-directory: docker
       run: |
+        export IMAGE_TAG=$(git rev-parse --short HEAD)
         docker compose build
     - name: Login to Docker Registry
       run: |
         docker login --username user1 --password ${{ secrets.DOCKER_REGISTRY_PASSWORD }} stevenzps2.duckdns.org
     - name: Push Docker Images to Registry
       run: |
-        docker push stevenzps2.duckdns.org/caddy:latest
-        docker push stevenzps2.duckdns.org/tinc:latest
-        docker push stevenzps2.duckdns.org/web:latest
+        export IMAGE_TAG=$(git rev-parse --short HEAD)
+        docker push stevenzps2.duckdns.org/caddy:${IMAGE_TAG}
+        docker push stevenzps2.duckdns.org/tinc:${IMAGE_TAG}
+        docker push stevenzps2.duckdns.org/web:${IMAGE_TAG}
 
   deploy:
     runs-on: ubuntu-latest
