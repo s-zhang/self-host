@@ -1,7 +1,7 @@
 services:
   caddy:
     build: caddy
-    image: stevenzps2.duckdns.org/caddy:latest
+    image: stevenzps2.duckdns.org/caddy:latest1
     restart: unless-stopped
     ports:
       - "80:80"
@@ -11,7 +11,7 @@ services:
       - caddy_config:/config
 
   duckdns:
-    image: lscr.io/linuxserver/duckdns:latest
+    image: lscr.io/linuxserver/duckdns:latest1
     environment:
       - TZ=America/Los_Angeles
       - SUBDOMAINS=stevenzps2,stevenzps
@@ -31,7 +31,7 @@ services:
 
   web:
     build: web
-    image: stevenzps2.duckdns.org/web:latest
+    image: stevenzps2.duckdns.org/web:latest1
     ports:
       - "8000"
 
