@@ -1,0 +1,10 @@
+{
+    "port": 8000,
+    "trelloApiKey":
+    {
+        "key": "#{TRELLO_KEY}",
+        "token": "#{TRELLO_TOKEN}#",
+        "oauthSecret": "#{TRELLO_OAUTH_SECRET}#"
+    }
+}
+

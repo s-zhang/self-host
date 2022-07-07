@@ -1,6 +1,6 @@
 FROM node:16
 
-ADD ../EasyEaaS/dist /build
+ADD dist/bundle.js /build/bundle.js
 
 ADD config /config
 

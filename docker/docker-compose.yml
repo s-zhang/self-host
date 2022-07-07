@@ -3,8 +3,6 @@ services:
     build: caddy
     image: stevenzps2.duckdns.org/caddy:latest
     restart: unless-stopped
-    environment:
-      - USER1_HASH_PASSWORD=${CADDY_USER1_HASH_PASSWORD:?user1 password not defined}
     ports:
       - "80:80"
       - "443:443"
@@ -32,7 +30,7 @@ services:
       - "655:655/tcp"
 
   web:
-    build: easyeaas
+    build: web
     image: stevenzps2.duckdns.org/web:latest
     ports:
       - "8000"
