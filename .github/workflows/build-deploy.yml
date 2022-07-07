@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: web
-        path: ./dist
+        path: EasyEaaS/dist
 
   build-docker:
     runs-on: ubuntu-latest
